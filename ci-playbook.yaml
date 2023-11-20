@@ -3,12 +3,16 @@
   connection: local
   tasks:
   - name: clone repository
-    git: 
+    git:
       repo: https://github.com/ahmedmahfoudhi/jenkins-ansible-kubernetes-pipeline.git
       dest: /opt/docker/jenkins-ansible-kubernetes-pipeline
       clone: yes
       update: yes
   - name: create docker image
-    command: docker build -t myapp:latest /opt/docker/jenkins-ansible-kubernetes-pipeline/backend-app
+    command: docker build -t myapp:latest /opt/docker/jenkins-ansible-kubernetes-pipeline
     args:
       chdir: /opt/docker/
+  - name: create tag to push image onto dockerhub
+    command: docker tag myapp:latest mahfoudhi/myapp:latest
+  - name: push docker image
+    command: docker push mahfoudhi/myapp:latest

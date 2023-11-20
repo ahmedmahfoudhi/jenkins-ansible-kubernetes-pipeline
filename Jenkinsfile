@@ -2,6 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage("start ")
+        stage("CI job"){
+            echo "CI job started ..."
+            ansible-playbook /opt/docker/ci-playbook.yaml
+        }
     }
 }
