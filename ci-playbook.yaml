@@ -1,0 +1,14 @@
+---
+- hosts: ansible
+  connection: local
+  tasks:
+  - name: clone repository
+    git: 
+      repo: https://github.com/ahmedmahfoudhi/jenkins-ansible-kubernetes-pipeline.git
+      dest: /opt/docker/jenkins-ansible-kubernetes-pipeline
+      clone: yes
+      update: yes
+  - name: create docker image
+    command: docker build -t myapp:latest /opt/docker/jenkins-ansible-kubernetes-pipeline/backend-app
+    args:
+      chdir: /opt/docker/

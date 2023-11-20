@@ -1,5 +1,5 @@
 FROM node:latest
-COPY package*.json ./
+COPY backend-app/package*.json ./
 RUN npm install
 COPY  . .
 EXPOSE 3000
