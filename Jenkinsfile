@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage("CI job"){
             steps{
-                ansible-playbook /opt/docker/ci-playbook.yaml
+                ansiblePlaybook playbook: '/opt/docker/ci-playbook.yaml'
             }
             
         }
