@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage("CI job"){
             steps{
-                sh 'ansible-playbook -i inventory /opt/docker/ci-playbook.yaml'
+                sh 'ansible-playbook /opt/docker/ci-playbook.yaml'
             }
             
         }
