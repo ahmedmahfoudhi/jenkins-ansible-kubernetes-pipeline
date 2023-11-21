@@ -1,7 +1,8 @@
 FROM node:latest
-COPY backend-app/package*.json ./
+WORKDIR /app
+COPY backend-app/package*.json /app
 RUN npm install
-COPY  . .
+COPY  backend-app /app
 EXPOSE 3000
 ENV PORT=3000
-CMD [ "node", "backend-app/index.js" ]
+CMD [ "node", "/app/index.js" ]
