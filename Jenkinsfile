@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage("CI job"){
             steps{
-                sh 'ansible-playbook -e @secret-vars.yaml /opt/docker/ci-playbook.yaml'
+                sh 'ansible-playbook -e @/opt/docker/secret-vars.yaml /opt/docker/ci-playbook.yaml'
             }
             
         }
