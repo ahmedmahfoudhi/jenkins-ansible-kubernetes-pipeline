@@ -1,6 +1,8 @@
 ---
 - hosts: ansible
   connection: local
+  vars: 
+    ansible_python_interpreter: /usr/bin/python3
   tasks:
   - name: clone repository
     git:
@@ -8,11 +10,21 @@
       dest: /opt/docker/jenkins-ansible-kubernetes-pipeline
       clone: yes
       update: yes
-  - name: create docker image
-    command: docker build -t myapp:latest /opt/docker/jenkins-ansible-kubernetes-pipeline
-    args:
-      chdir: /opt/docker/
-  - name: create tag to push image onto dockerhub
-    command: docker tag myapp:latest mahfoudhi/myapp:latest
-  - name: push docker image
-    command: docker push mahfoudhi/myapp:latest
+  - name: login to Dockerhub
+    docker_login:
+      username: mahfoudhi
+      password: "{{dockerhub_password}}"
+  - name: Build docker image
+    docker_image:
+      build:
+        path: "/opt/docker/jenkins-ansible-kubernetes-pipeline"
+      name: myapp
+      tag: latest
+      srouce: build
+  - name: Push docker image
+    docker_image:
+      name: myapp
+      repository: mahfoudhi/myapp
+      tag: latest
+      push: yes
+      source: local
