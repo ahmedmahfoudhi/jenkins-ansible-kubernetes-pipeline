@@ -3,8 +3,10 @@ pipeline {
 
     stages {
         stage("CI job"){
-            echo "CI job started ..."
-            ansible-playbook /opt/docker/ci-playbook.yaml
+            steps{
+                ansible-playbook /opt/docker/ci-playbook.yaml
+            }
+            
         }
     }
 }
