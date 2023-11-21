@@ -27,5 +27,5 @@ app.get('/', (_,res) => {
 
 app.listen(port, async () => {
     console.log(`Server is listening on port ${port}`)
-    await connect();
+    //await connect();
 })

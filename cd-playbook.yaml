@@ -1,0 +1,15 @@
+---
+- host: ansible
+  connection: local
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+  - name: Start kubernetes
+    command: minikube start
+  - name: Create a deployment
+    command: minikube kubectl -- apply -f /opt/docker/jenkins-kubernetes-pipeline/myapp.yaml
+  - name: Wait for deployment creation
+    command: minikube kubectl -- wait --for=condition=available --timeout=300s deployment/myapp-deployment
+  - name: Get a link to visit the deployment
+    command: minikube service myapp-service --url
+    register: deployment_url

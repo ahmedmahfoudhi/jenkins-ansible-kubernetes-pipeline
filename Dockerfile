@@ -4,4 +4,4 @@ RUN npm install
 COPY  . .
 EXPOSE 3000
 ENV PORT=3000
-CMD [ "node", "index.js" ]
+CMD [ "node", "backend-app/index.js" ]
