@@ -4,6 +4,10 @@
   vars: 
     ansible_python_interpreter: /usr/bin/python3
   tasks:
+  - name: Clear
+    file:
+      path: "/opt/docker/jenkins-ansible-kubernetes-pipeline"
+      state: absent
   - name: clone repository
     git:
       repo: https://github.com/ahmedmahfoudhi/jenkins-ansible-kubernetes-pipeline.git
@@ -17,10 +21,10 @@
   - name: Build docker image
     docker_image:
       build:
-        path: "/opt/docker/jenkins-ansible-kubernetes-pipeline"
+        path: "/opt/docker/jenkins-ansible-kubernetes-pipeline/backend-app"
       name: myapp
       tag: latest
-      srouce: build
+      source: build
   - name: Push docker image
     docker_image:
       name: myapp
