@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage("CI job"){
             steps {
-                sshagent(credentials: ['ssh-credentials-id']) {
+                sshagent(['ssh-credentials-id']) {
                     sh 'ansible-playbook -e @/opt/docker/secret-vars.yaml /opt/docker/ci-playbook.yaml'
                 }
             }
