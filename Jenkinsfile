@@ -11,7 +11,9 @@ pipeline {
         }
         stage("CD job"){
             steps{
-                sh 'ansible-playbook /opt/docker/cd-playbook.yaml'
+                    sh 'ansible-playbook /opt/docker/cd-playbook.yaml'
+                }
+                
             }
         }
     }
